@@ -1,3 +1,2 @@
-custom:
-  jwt:
-    secretKey: secretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKey
+server:
+  port: 8082
