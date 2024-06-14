@@ -34,7 +34,7 @@ class MemberControllerTest {
         // When
         ResultActions resultActions = mvc
                 .perform(
-                        post("/member/login")
+                        post("/api/v1/member/login")
                                 .content("""
                                         {
                                             "username": "user1",
@@ -54,15 +54,14 @@ class MemberControllerTest {
         MockHttpServletResponse response = mvcResult.getResponse();
 
         String authentication = response.getHeader("Authentication");
-
-        System.out.println("Authentication : " + authentication);
+        System.out.println("authentication : " + authentication);
 
         assertThat(authentication).isNotEmpty();
     }
 
     @Test
     @DisplayName("로그인 토큰 발급 검증")
-    void t2() throws Exception  {
+    void t2() throws Exception {
 
     }
 }

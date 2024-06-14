@@ -12,9 +12,11 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
+
 @RestController
-@RequestMapping("/member")
 @RequiredArgsConstructor
+@RequestMapping(value = "/api/v1/member", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
 public class MemberController {
     private final MemberService memberService;
 
@@ -30,16 +32,17 @@ public class MemberController {
     @Getter
     @AllArgsConstructor
     public static class LoginResponse {
-        private final String accessToken;
+        private final  String accessToken;
     }
 
     @PostMapping("/login")
     public RsData<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest, HttpServletResponse resp) {
 
-        // 테스트 용
+        // 테스트용
         // resp.addHeader("Authentication", "JWT Token");
 
         String accessToken = memberService.genAccessToken(loginRequest.getUsername(), loginRequest.getPassword());
+
         resp.addHeader("Authentication", accessToken);
 
         return RsData.of(
